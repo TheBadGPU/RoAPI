@@ -27,7 +27,7 @@ app.post('/hash', (req, res) => {
   const { admin, hashtext } = req.body;
 
   const adminToHash = admin.toString();
-  const textToHash = hashtext.toString();
+  const textToHash = hashtext
 
   const adminHash = crypto.createHash("sha512").update(adminToHash).digest("hex");
   const textHash = crypto.createHash("sha512").update(textToHash).digest("hex");
