@@ -5,7 +5,9 @@ const PORT = process.env.PORT || 3000;
 
 const crypto = require("crypto");
 const uuid = require('uuid');
+const bodyParser = require('body-parser');
 
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.send('')
@@ -21,19 +23,22 @@ app.get('/get-hash/:admin', (req, res) => {
   res.send(hash)
 })
 
-app.post('/hash/:hashtext/:admin', (req, res) => {
-  let adminToHash = req.params.admin
-  let textToHash = req.params.hashtext
-  const yourString = `${adminToHash}`;
-  console.log(yourString)
-  const hash = crypto.createHash("sha512").update(yourString).digest("hex");
-  console.log(hash);
+app.post('/hash', (req, res) => {
+  const { admin, hashtext } = req.body;
 
-  const yourString2 = `${textToHash}`;
-  console.log(yourString)
-  const hash2 = crypto.createHash("sha512").update(yourString2).digest("hex");
-  console.log(hash2);
-  res.send(hash2)
+  const adminToHash = admin.toString();
+  const textToHash = hashtext.toString();
+
+  const adminHash = crypto.createHash("sha512").update(adminToHash).digest("hex");
+  const textHash = crypto.createHash("sha512").update(textToHash).digest("hex");
+
+  console.log(adminToHash);
+  console.log(adminHash);
+
+  console.log(textToHash);
+  console.log(textHash);
+
+  res.json({ adminHash, textHash });
 })
 app.get('/test-1/:admin', (req, res) => {
   let GetSender = req.params.admin
