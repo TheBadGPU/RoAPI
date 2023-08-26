@@ -21,6 +21,20 @@ app.get('/get-hash/:admin', (req, res) => {
   res.send(hash)
 })
 
+app.post('/hash/:hashtext/:admin', (req, res) => {
+  let adminToHash = req.params.admin
+  let textToHash = req.params.hashtext
+  const yourString = `${adminToHash}`;
+  console.log(yourString)
+  const hash = crypto.createHash("sha512").update(yourString).digest("hex");
+  console.log(hash);
+
+  const yourString2 = `${textToHash}`;
+  console.log(yourString)
+  const hash2 = crypto.createHash("sha512").update(yourString2).digest("hex");
+  console.log(hash2);
+  res.send(hash2)
+})
 app.get('/test-1/:admin', (req, res) => {
   let GetSender = req.params.admin
   console.log(GetSender)
