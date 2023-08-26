@@ -32,13 +32,11 @@ app.post('/hash', (req, res) => {
   const adminHash = crypto.createHash("sha512").update(adminToHash).digest("hex");
   const textHash = crypto.createHash("sha512").update(textToHash).digest("hex");
 
-  console.log(adminToHash);
-  console.log(adminHash);
 
   console.log(textToHash);
   console.log(textHash);
 
-  res.json({ adminHash, textHash });
+  res.json({ textHash });
 })
 app.get('/test-1/:admin', (req, res) => {
   let GetSender = req.params.admin
