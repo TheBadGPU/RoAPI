@@ -24,7 +24,7 @@ app.get('/get-hash/:admin', (req, res) => {
 })
 
 app.post('/hash/:admin', (req, res) => {
-  const hashtext = req.body;
+  const hashtext = req.body.hashtext;
   const adminToHash = req.params.admin
 
     console.log("Received POST request with data:");
